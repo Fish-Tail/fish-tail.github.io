@@ -321,6 +321,75 @@
 			delete keyState[evt.keyCode];
 		});
 
+		//key binding for touch events
+		canvas.addEventListener('touchstart', function(e) {
+		  var touches = e.changedTouches;
+		  e.preventDefault();
+
+		  for (var i = 0; i < touches.length; i++) {
+		    if (touches[i].pageX <= 200) {
+		      keys[37] = true; //left arrow
+		    }
+		    if (touches[i].pageX > 200 && touches[i].pageX < 400) {
+		      keys[39] = true; //right arrow
+		    }
+		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
+		      //in touch events, same area acts as sprint and bullet key
+		      keys[16] = true; //shift key
+		      keys[17] = true; //ctrl key
+		    }
+		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
+		      keys[32] = true; //space
+		    }
+		  }
+		});
+
+		canvas.addEventListener('touchend', function(e) {
+		  var touches = e.changedTouches;
+		  e.preventDefault();
+
+		  for (var i = 0; i < touches.length; i++) {
+		    if (touches[i].pageX <= 200) {
+		      keys[37] = false;
+		    }
+		    if (touches[i].pageX > 200 && touches[i].pageX <= 640) {
+		      keys[39] = false;
+		    }
+		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
+		      keys[16] = false;
+		      keys[17] = false;
+		    }
+		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
+		      keys[32] = false;
+		    }
+		  }
+		});
+
+		canvas.addEventListener('touchmove', function(e) {
+		  var touches = e.changedTouches;
+		  e.preventDefault();
+
+		  for (var i = 0; i < touches.length; i++) {
+		    if (touches[i].pageX <= 200) {
+		      keys[37] = true;
+		      keys[39] = false;
+		    }
+		    if (touches[i].pageX > 200 && touches[i].pageX < 400) {
+		      keys[39] = true;
+		      keys[37] = false;
+		    }
+		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
+		      keys[16] = true;
+		      keys[32] = false;
+		    }
+		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
+		      keys[32] = true;
+		      keys[16] = false;
+		      keys[17] = false;
+		    }
+		  }
+		});
+
 		// check collision
 		that.checkBulletEnemyCollision = function() {
 
@@ -479,6 +548,7 @@
 
 			window.cancelAnimationFrame(requestAnimation);
 			stopped = true;
+			gameSound.stopGameSong();
 			gameUI.writeText('Game Over !!!', 120, WIDTH/2 - 280, HEIGHT / 2, 'orange');
     	gameUI.writeText('Press Space To Play Again', 60, WIDTH/2 - 300, HEIGHT - 100, 'orange');
 			// that.player = null;

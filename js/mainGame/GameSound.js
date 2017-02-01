@@ -76,4 +76,7 @@ function GameSound() {
   this.stopMachineGunSound = function() {
     machineGun.pause();
   }
+  this.stopGameSong = function() {
+    gameSong.pause();
+  }
 }
