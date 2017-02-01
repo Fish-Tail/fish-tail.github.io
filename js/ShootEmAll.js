@@ -26,6 +26,8 @@
 	var stopped = false;
 	var collision = 0;
 	var gameScore = 0;
+	var oldHighScore = localStorage.getItem('shootEmAllHighScore');
+
 
 	var enemies = [];
 	var maxEnemies = 20;
@@ -277,7 +279,8 @@
    		}
 
    		gameUI.writeText('Score: '+ gameScore, 20, WIDTH / 2 - 50, 50);
-   		gameUI.writeText('High Score: '+ gameScore, 20, WIDTH - 150, 50);
+   		oldHighScore = Math.max(gameScore, oldHighScore)
+   		gameUI.writeText('High Score: '+ oldHighScore, 20, WIDTH - 150, 50);
 
 		}
 
@@ -345,30 +348,20 @@
 
 		  for (var i = 0; i < touches.length; i++) {
 
-		    if (touches[i].pageX <= 150) {
+		    if (touches[i].pageX <= 100) {
 		      keyState[letterA] = true; //left arrow
 		    }
 
-		    if (touches[i].pageX > 250 && touches[i].pageX < 400) {
+		    if (touches[i].pageX > 150 && touches[i].pageX < 150) {
 		      keyState[letterD] = true; //right arrow
 		    }
 
-		    if (touches[i].pageX <= 400 && touches[i].pageY < 250 ) {
+		    if (touches[i].pageX <= 250 && touches[i].pageY < 250 ) {
 		      keyState[letterW] = true; //Up arrow
 		    }
 
-		    if (touches[i].pageX <= 400  && touches[i].pageY > 300) {
+		    if (touches[i].pageX <= 250  && touches[i].pageY > 300) {
 		      keyState[letterS] = true; //Down arrow
-		    }
-
-		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-		      //in touch events, same area acts as sprint and bullet key
-		      keyState[16] = true; //shift key
-		      keyState[17] = true; //ctrl key
-		    }
-
-		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-		      keyState[32] = true; //space
 		    }
 		  }
 		});
@@ -384,63 +377,8 @@
 		     	keyState[letterW] = false; //Up arrow
 		     	keyState[letterS] = false; //Down arrow
 		    }
-		    // if (touches[i].pageX > 250 && touches[i].pageX < 640) {
-		    //   keyState[letterD] = false;
-		    // }
-
-		    // if (touches[i].pageX <= 600 && touches[i].pageY < 250 ) {
-		    //   keyState[letterW] = false; //Up arrow
-		    // }
-
-		    // if (touches[i].pageX <= 600 && touches[i].pageY > 300) {
-		    //   keyState[letterS] = false; //Down arrow
-		    // }
-
-		    // if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-		    //   keyState[16] = false;
-		    //   keyState[17] = false;
-		    // }
-		    // if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-		    //   keyState[32] = false;
-		    // }
 		  }
 		});
-
-		// canvas.addEventListener('touchmove', function(e) {
-  //     var touches = e.changedTouches;
-  //     e.preventDefault();
-
-  //     for (var i = 0; i < touches.length; i++) {
-  //       if (touches[i].pageX <= 150) {
-		//       keyState[letterA] = true; //left arrow
-  //         keys[letterD] = false;
-  //       }
-  //       if (touches[i].pageX > 250 && touches[i].pageX < 400) {
-		//       keyState[letterA] = true; //left arrow
-  //         keys[letterD] = false;
-  //       }
-  //       if (touches[i].pageX <= 400 && touches[i].pageY < 200 ) {
-		//       keyState[letterW] = true; //Up arrow
-		//       keyState[letterS] = false; //Down arrow
-
-		//     }
-		//     if (touches[i].pageX <= 400  && touches[i].pageX > 300) {
-		//       keyState[letterS] = true; //Down arrow
-		//       keyState[letterW] = false; //Up arrow
-
-		//     }
-  //       if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-  //         keys[16] = true;
-  //         keys[32] = false;
-  //       }
-  //       if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-  //         keys[32] = true;
-  //         keys[16] = false;
-  //         keys[17] = false;
-  //       }
-  //     }
-  //   });
-
 
 		// check collision
 		that.checkBulletEnemyCollision = function() {
@@ -466,10 +404,6 @@
 		      	enemyAttacking.velX = -0.5;
 		      	enemyAttacking.velY = -0.5;
 
-		      }
-
-		      else {
-		      	// collisionTime = 0;
 		      }
 	    	}
 	    }	
@@ -601,6 +535,7 @@
 			window.cancelAnimationFrame(requestAnimation);
 			stopped = true;
 			gameSound.stopGameSong();
+			localStorage.setItem('shootEmAllHighScore', oldHighScore);
 			gameUI.writeText('Game Over !!!', 120, WIDTH/2 - 280, HEIGHT / 2, 'orange');
     	gameUI.writeText('Press Space To Play Again', 60, WIDTH/2 - 300, HEIGHT - 100, 'orange');
 			// that.player = null;
