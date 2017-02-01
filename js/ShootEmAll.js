@@ -352,7 +352,7 @@
 		      keyState[letterA] = true; //left arrow
 		    }
 
-		    if (touches[i].pageX > 150 && touches[i].pageX < 150) {
+		    if (touches[i].pageX > 150 && touches[i].pageX < 250) {
 		      keyState[letterD] = true; //right arrow
 		    }
 
@@ -502,27 +502,28 @@
 				maxBullets += 100;
 				powerUpState = true;
 				powerUp = null;
-				bulletCount += maxBullets;				
+				bulletCount += maxBullets;
+				gameSound.play('powerUpSound');				
 			}
 
 			else if (collision && powerUp.type == 19) { // type 19 is healthpowerup
 				that.player.health += 100;
 				var healthPercent = (200 - that.player.health) * 100 / 200;
 				healthBar.updateHealthUI(healthPercent);
-				powerUp = null;				
+				powerUp = null;
+				gameSound.play('powerUpSound');								
 			}
 		}
 
 		that.generateEnemies = function() {
-			maxEnemies += 20
+			maxEnemies += 20;
 			for (var i = enemies.length; i < maxEnemies; i++) {
 				
 				this.enemy = new Enemy();
-				this.enemy.initialVelocity++;
+				this.enemy.initialVelocity = maxEnemies / 50;
 				this.enemy.x = Utils.getRandom(-2000, 4000);
 				this.enemy.y = Utils.getRandom(-1000, 2000);
 				this.enemy.index = enemyIndex;
-				enemyIndex++;
 				enemies.push(this.enemy);
 			}
 		}
@@ -540,7 +541,6 @@
     	gameUI.writeText('Press Space To Play Again', 60, WIDTH/2 - 300, HEIGHT - 100, 'orange');
 			// that.player = null;
 				
-			
 			document.addEventListener('keypress', function(evt) {
 
 				if (evt.code == "Space" && stopped == true) { 
