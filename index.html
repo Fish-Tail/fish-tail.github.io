@@ -3,29 +3,14 @@
 <head>
 	<title>Shoot'em All</title>
 	<link href="https://fonts.googleapis.com/css?family=Creepster" rel="stylesheet">
-	<style type="text/css">
-		body{
-			overflow: hidden;
-		}
-		canvas{
-			position: absolute;
-			border: 1px solid black;
-			display: block;
-			margin: auto;
-			top:0;
-			right: 0;
-			bottom: 0;
-			left: 0;
-			cursor: crosshair;
-		}
-
-	</style>
+	<link rel="stylesheet" type="text/css" href="css/reset.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body>
-	<div class="main-wrapper" style="display: none;">
+	<div class="main-wrapper">
+	</div>
 
- 	</div>
-
+ 	<script src="js/View.js"></script>
 	<script src="js/GameUI.js"></script>
 	<script src="js/mainGame/GameSound.js"></script>
 	<script src="js/mainGame/Utils.js"></script>
@@ -35,7 +20,8 @@
 	<script src="js/mainGame/Enemy.js"></script>
 	<script src="js/mainGame/Player.js"></script>
 	<script src="js/mainGame/Bullet.js"></script>
+	<script src="js/mainGame/ShootEmAllGame.js"></script>
 	<script src="js/ShootEmAll.js"></script>
-<!-- 	<script src="js/PreLoader.js"></script> -->
+	<script src="js/Preloader.js"></script>
 </body>
 </html>
