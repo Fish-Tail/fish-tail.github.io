@@ -332,10 +332,10 @@
 
 		  for (var i = 0; i < touches.length; i++) {
 		    if (touches[i].pageX <= 200) {
-		      keys[37] = true; //left arrow
+		      keys[letterA] = true; //left arrow
 		    }
 		    if (touches[i].pageX > 200 && touches[i].pageX < 400) {
-		      keys[39] = true; //right arrow
+		      keys[letterD] = true; //right arrow
 		    }
 		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
 		      //in touch events, same area acts as sprint and bullet key
@@ -354,10 +354,10 @@
 
 		  for (var i = 0; i < touches.length; i++) {
 		    if (touches[i].pageX <= 200) {
-		      keys[37] = false;
+		      keys[letterA] = false;
 		    }
 		    if (touches[i].pageX > 200 && touches[i].pageX <= 640) {
-		      keys[39] = false;
+		      keys[letterD] = false;
 		    }
 		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
 		      keys[16] = false;
