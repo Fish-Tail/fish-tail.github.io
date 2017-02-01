@@ -356,7 +356,7 @@
 		      keyState[letterW] = true; //Up arrow
 		    }
 
-		    if (touches[i].pageX <= 400  && touches[i].pageX > 300) {
+		    if (touches[i].pageX <= 400  && touches[i].pageY > 300) {
 		      keyState[letterS] = true; //Down arrow
 		    }
 
@@ -388,7 +388,7 @@
 		      keyState[letterW] = false; //Up arrow
 		    }
 
-		    if (touches[i].pageX <= 400  && touches[i].pageX > 300) {
+		    if (touches[i].pageX <= 400  && touches[i].pageY > 300) {
 		      keyState[letterS] = false; //Down arrow
 		    }
 
@@ -402,40 +402,40 @@
 		  }
 		});
 
-		canvas.addEventListener('touchmove', function(e) {
-      var touches = e.changedTouches;
-      e.preventDefault();
+		// canvas.addEventListener('touchmove', function(e) {
+  //     var touches = e.changedTouches;
+  //     e.preventDefault();
 
-      for (var i = 0; i < touches.length; i++) {
-        if (touches[i].pageX <= 150) {
-		      keyState[letterA] = true; //left arrow
-          keys[letterD] = false;
-        }
-        if (touches[i].pageX > 250 && touches[i].pageX < 400) {
-		      keyState[letterA] = true; //left arrow
-          keys[letterD] = false;
-        }
-        if (touches[i].pageX <= 400 && touches[i].pageY < 200 ) {
-		      keyState[letterW] = true; //Up arrow
-		      keyState[letterS] = false; //Down arrow
+  //     for (var i = 0; i < touches.length; i++) {
+  //       if (touches[i].pageX <= 150) {
+		//       keyState[letterA] = true; //left arrow
+  //         keys[letterD] = false;
+  //       }
+  //       if (touches[i].pageX > 250 && touches[i].pageX < 400) {
+		//       keyState[letterA] = true; //left arrow
+  //         keys[letterD] = false;
+  //       }
+  //       if (touches[i].pageX <= 400 && touches[i].pageY < 200 ) {
+		//       keyState[letterW] = true; //Up arrow
+		//       keyState[letterS] = false; //Down arrow
 
-		    }
-		    if (touches[i].pageX <= 400  && touches[i].pageX > 300) {
-		      keyState[letterS] = true; //Down arrow
-		      keyState[letterW] = false; //Up arrow
+		//     }
+		//     if (touches[i].pageX <= 400  && touches[i].pageX > 300) {
+		//       keyState[letterS] = true; //Down arrow
+		//       keyState[letterW] = false; //Up arrow
 
-		    }
-        if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-          keys[16] = true;
-          keys[32] = false;
-        }
-        if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-          keys[32] = true;
-          keys[16] = false;
-          keys[17] = false;
-        }
-      }
-    });
+		//     }
+  //       if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
+  //         keys[16] = true;
+  //         keys[32] = false;
+  //       }
+  //       if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
+  //         keys[32] = true;
+  //         keys[16] = false;
+  //         keys[17] = false;
+  //       }
+  //     }
+  //   });
 
 
 		// check collision
