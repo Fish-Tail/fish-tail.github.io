@@ -334,12 +334,13 @@
 		  e.preventDefault();
 
 		  for (var i = 0; i < touches.length; i++) {
+
 		   	var bullet = new Bullet();
-			bullet.init(that.player.x, that.player.y, gameTime, touches[i].pageX, touches[i].pageY, that.player.playerRotation);
-			bullets.push(bullet);
-			gameSound.play('bullet');
-			targetX = touches[i].pageX - that.player.centerX;
-			targetY = touches[i].pageY - that.player.centerY;
+				bullet.init(that.player.x, that.player.y, gameTime, touches[i].pageX, touches[i].pageY, that.player.playerRotation);
+				bullets.push(bullet);
+				gameSound.play('bullet');
+				targetX = touches[i].pageX - that.player.centerX;
+				targetY = touches[i].pageY - that.player.centerY;
 		  }
 
 		  for (var i = 0; i < touches.length; i++) {
@@ -352,7 +353,7 @@
 		      keyState[letterD] = true; //right arrow
 		    }
 
-		    if (touches[i].pageX <= 400 && touches[i].pageY < 200 ) {
+		    if (touches[i].pageX <= 400 && touches[i].pageY < 250 ) {
 		      keyState[letterW] = true; //Up arrow
 		    }
 
@@ -377,28 +378,31 @@
 		  e.preventDefault();
 
 		  for (var i = 0; i < touches.length; i++) {
-		    if (touches[i].pageX <= 150) {
+		    if (touches[i].pageX > 0) {
 		      keyState[letterA] = false;
-		    }
-		    if (touches[i].pageX > 250 && touches[i].pageX <= 400) {
 		      keyState[letterD] = false;
+		     	keyState[letterW] = false; //Up arrow
+		     	keyState[letterS] = false; //Down arrow
 		    }
+		    // if (touches[i].pageX > 250 && touches[i].pageX < 640) {
+		    //   keyState[letterD] = false;
+		    // }
 
-		    if (touches[i].pageX <= 400 && touches[i].pageY < 200 ) {
-		      keyState[letterW] = false; //Up arrow
-		    }
+		    // if (touches[i].pageX <= 600 && touches[i].pageY < 250 ) {
+		    //   keyState[letterW] = false; //Up arrow
+		    // }
 
-		    if (touches[i].pageX <= 400  && touches[i].pageY > 300) {
-		      keyState[letterS] = false; //Down arrow
-		    }
+		    // if (touches[i].pageX <= 600 && touches[i].pageY > 300) {
+		    //   keyState[letterS] = false; //Down arrow
+		    // }
 
-		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-		      keyState[16] = false;
-		      keyState[17] = false;
-		    }
-		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-		      keyState[32] = false;
-		    }
+		    // if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
+		    //   keyState[16] = false;
+		    //   keyState[17] = false;
+		    // }
+		    // if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
+		    //   keyState[32] = false;
+		    // }
 		  }
 		});
 
