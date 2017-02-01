@@ -18,6 +18,8 @@
 	  x: 0,
 	  y: 0
 	};
+	var targetX;
+	var targetY;
 
 	var requestAnimation;
 	var gameTime = 0;
@@ -227,10 +229,10 @@
 
 			that.background.draw();
 			that.walls.draw();
-			
-			var targetX = mouse.x - that.player.centerX;
-		  var targetY = mouse.y - that.player.centerY;
-
+			if (mouse.x != 0 && mouse.y != 0) {
+				targetX = mouse.x - that.player.centerX;
+			  targetY = mouse.y - that.player.centerY;
+			}
 		  that.player.playerRotation = Math.atan2(targetY, targetX) - Math.PI / 2;
 		  that.player.draw(that.player.playerRotation);
 
@@ -327,16 +329,34 @@
 
 		//key binding for touch events
 		canvas.addEventListener('touchstart', function(e) {
+
 		  var touches = e.changedTouches;
 		  e.preventDefault();
-		 
 
 		  for (var i = 0; i < touches.length; i++) {
-		    
-		    var bullet = new Bullet();
+		   	var bullet = new Bullet();
 			bullet.init(that.player.x, that.player.y, gameTime, touches[i].pageX, touches[i].pageY, that.player.playerRotation);
 			bullets.push(bullet);
 			gameSound.play('bullet');
+			targetX = touches[i].pageX - that.player.centerX;
+			targetY = touches[i].pageY - that.player.centerY;
+		  }
+
+		  for (var i = 0; i < touches.length; i++) {
+		    if (touches[i].pageX <= 200) {
+		      keyState[letterA] = true; //left arrow
+		    }
+		    if (touches[i].pageX > 200 && touches[i].pageX < 400) {
+		      keyState[letterD] = true; //right arrow
+		    }
+		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
+		      //in touch events, same area acts as sprint and bullet key
+		      keyState[16] = true; //shift key
+		      keyState[17] = true; //ctrl key
+		    }
+		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
+		      keyState[32] = true; //space
+		    }
 		  }
 		});
 
@@ -346,17 +366,17 @@
 
 		  for (var i = 0; i < touches.length; i++) {
 		    if (touches[i].pageX <= 200) {
-		      keys[letterA] = false;
+		      keyState[letterA] = false;
 		    }
 		    if (touches[i].pageX > 200 && touches[i].pageX <= 640) {
-		      keys[letterD] = false;
+		      keyState[letterD] = false;
 		    }
 		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-		      keys[16] = false;
-		      keys[17] = false;
+		      keyState[16] = false;
+		      keyState[17] = false;
 		    }
 		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-		      keys[32] = false;
+		      keyState[32] = false;
 		    }
 		  }
 		});
