@@ -9,6 +9,10 @@
 
 	var keyState;
 	var mouseState = 0;
+	var letterA = 65;
+	var letterD = 68;
+	var letterW = 87;
+	var letterS = 83;
 
 	var mouse = {
 	  x: 0,
@@ -371,12 +375,12 @@
 
 		  for (var i = 0; i < touches.length; i++) {
 		    if (touches[i].pageX <= 200) {
-		      keys[37] = true;
-		      keys[39] = false;
+		      keys[letterA] = true;
+		      keys[letterD] = false;
 		    }
 		    if (touches[i].pageX > 200 && touches[i].pageX < 400) {
-		      keys[39] = true;
-		      keys[37] = false;
+		      keys[letterD] = true;
+		      keys[letterA] = false;
 		    }
 		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
 		      keys[16] = true;
