@@ -329,22 +329,14 @@
 		canvas.addEventListener('touchstart', function(e) {
 		  var touches = e.changedTouches;
 		  e.preventDefault();
+		 
 
 		  for (var i = 0; i < touches.length; i++) {
-		    if (touches[i].pageX <= 200) {
-		      keys[letterA] = true; //left arrow
-		    }
-		    if (touches[i].pageX > 200 && touches[i].pageX < 400) {
-		      keys[letterD] = true; //right arrow
-		    }
-		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-		      //in touch events, same area acts as sprint and bullet key
-		      keys[16] = true; //shift key
-		      keys[17] = true; //ctrl key
-		    }
-		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-		      keys[32] = true; //space
-		    }
+		    
+		    var bullet = new Bullet();
+			bullet.init(that.player.x, that.player.y, gameTime, touches[i].pageX, touches[i].pageY, that.player.playerRotation);
+			bullets.push(bullet);
+			gameSound.play('bullet');
 		  }
 		});
 
@@ -369,30 +361,6 @@
 		  }
 		});
 
-		canvas.addEventListener('touchmove', function(e) {
-		  var touches = e.changedTouches;
-		  e.preventDefault();
-
-		  for (var i = 0; i < touches.length; i++) {
-		    if (touches[i].pageX <= 200) {
-		      keys[letterA] = true;
-		      keys[letterD] = false;
-		    }
-		    if (touches[i].pageX > 200 && touches[i].pageX < 400) {
-		      keys[letterD] = true;
-		      keys[letterA] = false;
-		    }
-		    if (touches[i].pageX > 640 && touches[i].pageX <= 1080) {
-		      keys[16] = true;
-		      keys[32] = false;
-		    }
-		    if (touches[i].pageX > 1080 && touches[i].pageX < 1280) {
-		      keys[32] = true;
-		      keys[16] = false;
-		      keys[17] = false;
-		    }
-		  }
-		});
 
 		// check collision
 		that.checkBulletEnemyCollision = function() {
